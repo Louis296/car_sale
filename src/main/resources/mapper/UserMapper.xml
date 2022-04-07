@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.louis296.car_sale.mapper.UserMapper">
+    <resultMap id="userResult" type="com.louis296.car_sale.model.dao.User">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="result" property="result"/>
+    </resultMap>
+
+    <select id="getUserByUserId" parameterType="java.lang.String" resultMap="userResult">
+        select * from user where user_id=#{id};
+    </select>
+
+</mapper>
