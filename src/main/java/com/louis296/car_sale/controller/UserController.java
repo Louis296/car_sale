@@ -1,6 +1,7 @@
 package com.louis296.car_sale.controller;
 
 import com.louis296.car_sale.model.req.UserLoginReq;
+import com.louis296.car_sale.model.req.UserRegisterReq;
 import com.louis296.car_sale.model.resp.Resp;
 import com.louis296.car_sale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class UserController {
         Resp resp=new Resp(userService.userLogin(userLoginReq.getUserId(),userLoginReq.getPassword()));
         resp.setStatus("success");
         return resp;
+    }
+
+    @PostMapping("/register")
+    Resp userRegister(@RequestBody UserRegisterReq userRegisterReq){
+        return null;
     }
 }
