@@ -10,6 +10,7 @@ public class SaleOrder {
     private double price;
     private long carId;
     private long userId;
+    private String address;
     private long saleOrderStatus;
     private Date createTime;
     private Date updateTime;
@@ -51,6 +52,13 @@ public class SaleOrder {
       this.userId = userId;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public long getSaleOrderStatus() {
       return saleOrderStatus;
