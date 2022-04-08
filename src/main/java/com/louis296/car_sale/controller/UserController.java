@@ -26,11 +26,11 @@ public class UserController {
 
     @PostMapping("/register")
     Resp userRegister(@RequestBody UserRegisterReq userRegisterReq){
-        return null;
+        return userService.userRegister(userRegisterReq);
     }
 
     @GetMapping("/info")
     Resp userInfo(User user){
-        return null;
+        return userService.userInfo((int) user.getId());
     }
 }

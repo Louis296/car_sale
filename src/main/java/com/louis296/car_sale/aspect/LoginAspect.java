@@ -38,7 +38,7 @@ public class LoginAspect {
         try{
             Object[] args=joinPoint.getArgs();
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            String token = request.getHeader("Authorize");
+            String token = request.getHeader("Authorization");
             JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(CarSaleApplication.secret)).build();
             DecodedJWT decodedJWT=jwtVerifier.verify(token);
             String userId=decodedJWT.getClaim("aud").asString();
@@ -48,6 +48,7 @@ public class LoginAspect {
                     User userParam=(User) argParam;
                     userParam.setType(user.getType());
                     userParam.setUserName(user.getUserName());
+                    userParam.setId(user.getId());
                 }
             }
             result=joinPoint.proceed(args);
