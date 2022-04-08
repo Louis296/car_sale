@@ -5,6 +5,7 @@
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="password" property="password"/>
+        <result column="user_name" property="userName"/>
         <result column="phone" property="phone"/>
         <result column="type" property="type"/>
         <result column="create_time" property="createTime"/>
@@ -16,4 +17,16 @@
         select * from user where user_id=#{id};
     </select>
 
+    <select id="getUserByUserIdAndPassword" parameterType="java.lang.String" resultMap="userResult">
+        select * from user where user_id=#{id} and password=#{password};
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.Integer" resultMap="userResult">
+        select * from user where id=#{id};
+    </select>
+
+    <insert id="createUser" parameterType="com.louis296.car_sale.model.dao.User">
+        insert into user(user_id, password, user_name, phone, create_time, update_time)
+        VALUES (#{userId},#{password},#{userName},#{phone},now(),now());
+    </insert>
 </mapper>

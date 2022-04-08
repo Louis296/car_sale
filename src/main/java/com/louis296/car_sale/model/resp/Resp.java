@@ -2,11 +2,13 @@ package com.louis296.car_sale.model.resp;
 
 public class Resp {
     String status;
-    Object data;
+    Data data;
 
-    public Resp(Object data){
+    public Resp(Data data){
         this.data=data;
     }
+
+    public Resp(){}
 
     public String getStatus() {
         return status;
@@ -20,7 +22,7 @@ public class Resp {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Data data) {
         this.data = data;
     }
 }

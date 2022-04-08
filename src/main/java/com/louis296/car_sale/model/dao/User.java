@@ -8,6 +8,7 @@ public class User {
     private long id;
     private String userId;
     private String password;
+    private String userName;
     private String phone;
     private int type;
     private Date createTime;
@@ -48,6 +49,13 @@ public class User {
       this.password = password;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getPhone() {
       return phone;

@@ -1,8 +1,8 @@
 package com.louis296.car_sale.model.resp;
 
-public class UserLoginData {
+public class UserLoginData implements Data{
     String token;
-    String type;
+    int type;
 
     public String getToken() {
         return token;
@@ -12,11 +12,11 @@ public class UserLoginData {
         this.token = token;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

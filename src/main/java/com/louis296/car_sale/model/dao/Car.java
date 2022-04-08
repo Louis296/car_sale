@@ -8,6 +8,7 @@ public class Car {
     private long id;
     private String name;
     private String version;
+    private double price;
     private String description;
     private Date createTime;
     private Date updateTime;
@@ -40,6 +41,13 @@ public class Car {
       this.version = version;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public String getDescription() {
       return description;
