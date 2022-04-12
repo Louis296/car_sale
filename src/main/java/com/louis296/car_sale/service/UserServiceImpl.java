@@ -25,8 +25,7 @@ public class UserServiceImpl implements UserService{
     public Resp userLogin(String userId, String password) {
         Resp resp=new Resp();
         try{
-            User user=userMapper.getUserByUserIdAndPassword(userId,password);
-//            User user=userMapper.getUserByUserIdAndPassword(userId, DigestUtils.md5DigestAsHex(password.getBytes()));
+            User user=userMapper.getUserByUserIdAndPassword(userId, DigestUtils.md5DigestAsHex((password+CarSaleApplication.salt).getBytes()));
             String token= JWT.create().withAudience(user.getUserId()).sign(Algorithm.HMAC256(CarSaleApplication.secret));
             UserLoginData userLoginData=new UserLoginData();
             userLoginData.setType(user.getType());
@@ -46,8 +45,7 @@ public class UserServiceImpl implements UserService{
         User user=new User();
         user.setUserName(req.getUserName());
         user.setUserId(req.getUserId());
-        user.setPassword(req.getPassword());
-//        user.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        user.setPassword(DigestUtils.md5DigestAsHex((req.getPassword()+CarSaleApplication.salt).getBytes()));
         user.setPhone(req.getPhone());
         try{
             userMapper.createUser(user);
