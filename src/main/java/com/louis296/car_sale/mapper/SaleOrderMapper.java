@@ -11,4 +11,5 @@ public interface SaleOrderMapper {
     void changeSaleOrderStatus(int id,int status);
     SaleOrder getSaleOrderById(int id);
     List<SaleOrder> getSaleOrdersByUserId(int limit,int offset,int userId);
+    List<SaleOrder> getSaleOrders(int limit,int offset);
 }

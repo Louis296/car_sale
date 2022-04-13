@@ -32,4 +32,7 @@
         select * from sale_order where user_id=#{userId} order by create_time desc limit #{limit} offset #{offset};
     </select>
 
+    <select id="getSaleOrders" parameterType="java.lang.Integer" resultMap="saleOrderResult">
+        select * from sale_order order by create_time desc limit #{limit} offset #{offset};
+    </select>
 </mapper>

@@ -7,6 +7,7 @@ import com.louis296.car_sale.model.req.SaleOrderCreateReq;
 import com.louis296.car_sale.model.req.SaleOrderPayReq;
 import com.louis296.car_sale.model.resp.Resp;
 import com.louis296.car_sale.service.SaleOrderService;
+import com.louis296.car_sale.util.RespUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,29 @@ public class SaleOrderController {
     @PostMapping("/pay")
     Resp orderPay(User user, @RequestBody SaleOrderPayReq req){
         return saleOrderService.orderPay(req.getOrderId());
+    }
+
+    @PostMapping("/process")
+    Resp orderProcess(User user, @RequestBody SaleOrderPayReq req){
+        if(user.getType()!=0){
+            return RespUtil.noPermissionResp();
+        }
+        return saleOrderService.orderProcess(req.getOrderId());
+    }
+
+    @PostMapping("/finish")
+    Resp orderFinish(User user,@RequestBody SaleOrderPayReq req){
+        if(user.getType()!=0){
+            return RespUtil.noPermissionResp();
+        }
+        return saleOrderService.orderFinish(req.getOrderId());
+    }
+
+    @GetMapping("/list_all")
+    Resp orderListAll(User user,@RequestParam(value = "Limit")int limit,@RequestParam(value = "Offset")int offset){
+        if(user.getType()!=0){
+            return RespUtil.noPermissionResp();
+        }
+        return saleOrderService.orderListAll(limit,offset);
     }
 }

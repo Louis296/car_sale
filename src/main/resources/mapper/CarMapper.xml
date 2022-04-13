@@ -17,4 +17,17 @@
     <select id="getCarById" parameterType="java.lang.Integer" resultMap="carResult">
         select * from car where id=#{id};
     </select>
+
+    <select id="getAllCars" resultMap="carResult">
+        select * from car where status=1;
+    </select>
+
+    <insert id="createCar" parameterType="com.louis296.car_sale.model.dao.Car">
+        insert into car(name, version, price, description, create_time, update_time)
+        values (#{name},#{version},#{price},#{description},now(),now());
+    </insert>
+
+    <update id="softDeleteCar" parameterType="java.lang.Integer">
+        update car set status=0 where id=#{id};
+    </update>
 </mapper>

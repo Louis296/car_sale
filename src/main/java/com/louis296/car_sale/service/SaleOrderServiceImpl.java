@@ -101,4 +101,55 @@ public class SaleOrderServiceImpl implements SaleOrderService{
         return resp;
     }
 
+    @Override
+    public Resp orderProcess(int id) {
+        Resp resp=new Resp();
+        try{
+            SaleOrder order=saleOrderMapper.getSaleOrderById(id);
+            if(order.getSaleOrderStatus()!=1){
+                return RespUtil.errorResp("sale order with status "+order.getSaleOrderStatus()+" cannot process");
+            }
+            saleOrderMapper.changeSaleOrderStatus((int)order.getId(),2);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        resp.setStatus("success");
+        return resp;
+    }
+
+    @Override
+    public Resp orderFinish(int id) {
+        Resp resp=new Resp();
+        try{
+            SaleOrder order=saleOrderMapper.getSaleOrderById(id);
+            if(order.getSaleOrderStatus()!=2){
+                return RespUtil.errorResp("sale order with status "+order.getSaleOrderStatus()+" cannot finish");
+            }
+            saleOrderMapper.changeSaleOrderStatus((int)order.getId(),3);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        resp.setStatus("success");
+        return resp;
+    }
+
+    @Override
+    public Resp orderListAll(int offset, int limit) {
+        Resp resp=new Resp();
+        List<SaleOrder> list=saleOrderMapper.getSaleOrders(limit,limit*(offset-1));
+        List<SaleOrderResp> respList=new ArrayList<>();
+        for(SaleOrder order:list){
+            SaleOrderResp item=new SaleOrderResp(order);
+            item.setCar(carMapper.getCarById((int) order.getCarId()));
+            respList.add(item);
+        }
+        SaleOrderListData data=new SaleOrderListData();
+        data.setList(respList);
+        data.setLimit(limit);
+        data.setOffset(offset);
+        resp.setData(data);
+        resp.setStatus("success");
+        return resp;
+    }
+
 }

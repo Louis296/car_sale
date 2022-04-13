@@ -10,4 +10,17 @@ public class RespUtil {
         resp.setStatus("error");
         return resp;
     }
+
+    public static Resp noPermissionResp(){
+        Resp resp=new Resp();
+        resp.setData(new ErrorData("not enough permission"));
+        resp.setStatus("error");
+        return resp;
+    }
+
+    public static Resp noDataSuccessResp(){
+        Resp resp=new Resp();
+        resp.setStatus("success");
+        return resp;
+    }
 }

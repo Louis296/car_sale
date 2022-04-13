@@ -7,4 +7,7 @@ public interface SaleOrderService {
     Resp orderList(int offset,int limit,int userId);
     Resp orderCancel(long userId,int id);
     Resp orderPay(int id);
+    Resp orderProcess(int id);
+    Resp orderFinish(int id);
+    Resp orderListAll(int offset,int limit);
 }
