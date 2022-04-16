@@ -18,6 +18,9 @@
     <insert id="createSaleOrder" parameterType="com.louis296.car_sale.model.dao.SaleOrder">
         insert into sale_order(price, car_id, user_id, address, create_time, update_time)
         values (#{price}, #{carId}, #{userId}, #{address}, now(), now());
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
     </insert>
     
     <update id="changeSaleOrderStatus" parameterType="java.lang.Integer">

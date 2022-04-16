@@ -63,6 +63,6 @@ public class SaleOrderController {
         if(user.getType()!=0){
             return RespUtil.noPermissionResp();
         }
-        return saleOrderService.orderListAll(limit,offset);
+        return saleOrderService.orderListAll(offset,limit);
     }
 }

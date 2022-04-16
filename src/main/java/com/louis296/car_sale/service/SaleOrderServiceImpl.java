@@ -40,6 +40,9 @@ public class SaleOrderServiceImpl implements SaleOrderService{
             Car car=carMapper.getCarById(carId);
             saleOrder.setPrice(car.getPrice());
             saleOrderMapper.createSaleOrder(saleOrder);
+            SaleOrderResp data=new SaleOrderResp(saleOrderMapper.getSaleOrderById((int) saleOrder.getId()));
+            data.setCar(car);
+            resp.setData(data);
             resp.setStatus("success");
         }catch (Exception e){
             return RespUtil.errorResp("no such car or sql error");

@@ -5,7 +5,7 @@ import com.louis296.car_sale.model.dao.SaleOrder;
 
 import java.util.Date;
 
-public class SaleOrderResp {
+public class SaleOrderResp implements Data{
 
     private long id;
     private double price;
