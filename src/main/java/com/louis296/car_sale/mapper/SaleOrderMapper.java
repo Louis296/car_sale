@@ -12,4 +12,5 @@ public interface SaleOrderMapper {
     SaleOrder getSaleOrderById(int id);
     List<SaleOrder> getSaleOrdersByUserId(int limit,int offset,int userId);
     List<SaleOrder> getSaleOrders(int limit,int offset);
+    List<SaleOrder> getFinishSaleOrdersByUserId(int id);
 }

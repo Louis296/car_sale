@@ -1,8 +1,9 @@
 package com.louis296.car_sale.model.resp;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.louis296.car_sale.model.dao.Car;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarResp {
 
     private long id;
@@ -10,6 +11,7 @@ public class CarResp {
     private String version;
     private double price;
     private String description;
+    private long orderId;
 
     public CarResp(Car car){
         this.id=car.getId();
@@ -17,6 +19,14 @@ public class CarResp {
         this.version=car.getVersion();
         this.price=car.getPrice();
         this.description=car.getDescription();
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public long getId() {

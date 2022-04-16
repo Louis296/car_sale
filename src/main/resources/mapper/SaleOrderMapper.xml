@@ -38,4 +38,8 @@
     <select id="getSaleOrders" parameterType="java.lang.Integer" resultMap="saleOrderResult">
         select * from sale_order order by create_time desc limit #{limit} offset #{offset};
     </select>
+
+    <select id="getFinishSaleOrdersByUserId" parameterType="java.lang.Integer" resultMap="saleOrderResult">
+        select * from sale_order where user_id=#{id} and sale_order_status=3 order by create_time desc;
+    </select>
 </mapper>

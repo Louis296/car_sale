@@ -7,4 +7,5 @@ public interface CarService {
     Resp carList();
     Resp carCreate(CarCreateReq req);
     Resp carDelete(int id);
+    Resp carSelfList(int userId);
 }

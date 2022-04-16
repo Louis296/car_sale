@@ -40,4 +40,9 @@ public class CarController {
         }
         return carService.carCreate(req);
     }
+
+    @GetMapping("/self_list")
+    Resp carSelfList(User user){
+        return carService.carSelfList((int) user.getId());
+    }
 }
