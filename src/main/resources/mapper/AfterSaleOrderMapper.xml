@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis296.car_sale.mapper.AfterSaleOrderMapper">
+    <resultMap id="result" type="com.louis296.car_sale.model.dao.AfterSaleOrder">
+        <id column="id" property="id"/>
+        <result column="price" property="price"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="address" property="address"/>
+        <result column="type" property="type"/>
+        <result column="car_id" property="carId"/>
+        <result column="sale_order_id" property="saleOrderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="createOrder" parameterType="com.louis296.car_sale.model.dao.AfterSaleOrder">
+        insert into after_sale_order(address, type, car_id, sale_order_id, user_id, create_time, update_time)
+        VALUES (#{address},#{type},#{carId},#{saleOrderId},#{userId},now(),now());
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
+    <update id="changeOrderStatus" parameterType="java.lang.Integer">
+        update after_sale_order set order_status=#{status}, update_time=now() where id=#{id};
+    </update>
+
+    <select id="getOrdersByUserIdAndType" parameterType="java.lang.Integer" resultMap="result">
+        select * from after_sale_order where user_id=#{userId} and type=#{type}
+        order by create_time desc limit #{limit} offset #{offset};
+    </select>
+
+    <select id="getOrderById" parameterType="java.lang.Integer" resultMap="result">
+        select * from after_sale_order where id=#{id};
+    </select>
+</mapper>

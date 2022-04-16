@@ -19,7 +19,7 @@
     </select>
 
     <select id="getAllCars" resultMap="carResult">
-        select * from car where status=1;
+        select * from car where status=1 order by create_time desc;
     </select>
 
     <insert id="createCar" parameterType="com.louis296.car_sale.model.dao.Car">

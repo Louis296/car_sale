@@ -1,15 +1,17 @@
 package com.louis296.car_sale.model.dao;
 
 
-import java.sql.Timestamp;
 import java.util.Date;
 
-public class TestDrive {
+public class AfterSaleOrder {
 
   private long id;
-  private long carId;
+  private double price;
+  private long orderStatus;
   private String address;
-  private String phone;
+  private int type;
+  private long carId;
+  private long saleOrderId;
   private long userId;
   private Date createTime;
   private Date updateTime;
@@ -25,12 +27,21 @@ public class TestDrive {
   }
 
 
-  public long getCarId() {
-    return carId;
+  public double getPrice() {
+    return price;
   }
 
-  public void setCarId(long carId) {
-    this.carId = carId;
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+
+  public long getOrderStatus() {
+    return orderStatus;
+  }
+
+  public void setOrderStatus(long orderStatus) {
+    this.orderStatus = orderStatus;
   }
 
 
@@ -43,12 +54,30 @@ public class TestDrive {
   }
 
 
-  public String getPhone() {
-    return phone;
+  public int getType() {
+    return type;
   }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setType(int type) {
+    this.type = type;
+  }
+
+
+  public long getCarId() {
+    return carId;
+  }
+
+  public void setCarId(long carId) {
+    this.carId = carId;
+  }
+
+
+  public long getSaleOrderId() {
+    return saleOrderId;
+  }
+
+  public void setSaleOrderId(long saleOrderId) {
+    this.saleOrderId = saleOrderId;
   }
 
 
