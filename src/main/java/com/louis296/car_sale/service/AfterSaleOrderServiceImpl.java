@@ -38,7 +38,7 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
     public Resp orderCreate(AfterSaleOrderCreateReq req,int type,int userId) {
         Resp resp=new Resp();
         try{
-            SaleOrder saleOrder=saleOrderMapper.getSaleOrderById(req.getAfterSaleOrderId());
+            SaleOrder saleOrder=saleOrderMapper.getSaleOrderById(req.getSaleOrderId());
             if(saleOrder.getUserId()!=userId){
                 return RespUtil.errorResp("sale order "+saleOrder.getId()+" do not belong to user "+userId);
             }

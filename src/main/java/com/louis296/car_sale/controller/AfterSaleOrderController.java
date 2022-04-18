@@ -31,6 +31,6 @@ public class AfterSaleOrderController {
 
     @PostMapping("/cancel")
     Resp orderCancel(@RequestBody AfterSaleOrderCreateReq req){
-        return saleOrderService.orderCancel(req.getAfterSaleOrderId());
+        return saleOrderService.orderCancel(req.getSaleOrderId());
     }
 }

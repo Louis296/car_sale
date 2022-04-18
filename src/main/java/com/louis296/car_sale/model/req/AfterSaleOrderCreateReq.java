@@ -1,15 +1,15 @@
 package com.louis296.car_sale.model.req;
 
 public class AfterSaleOrderCreateReq {
-    int afterSaleOrderId;
+    int saleOrderId;
     String address;
 
-    public int getAfterSaleOrderId() {
-        return afterSaleOrderId;
+    public int getSaleOrderId() {
+        return saleOrderId;
     }
 
-    public void setAfterSaleOrderId(int afterSaleOrderId) {
-        this.afterSaleOrderId = afterSaleOrderId;
+    public void setSaleOrderId(int saleOrderId) {
+        this.saleOrderId = saleOrderId;
     }
 
     public String getAddress() {
