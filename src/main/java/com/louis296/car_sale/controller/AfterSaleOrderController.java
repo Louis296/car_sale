@@ -1,6 +1,7 @@
 package com.louis296.car_sale.controller;
 
 import com.louis296.car_sale.model.dao.User;
+import com.louis296.car_sale.model.req.AfterSaleOrderCancelReq;
 import com.louis296.car_sale.model.req.AfterSaleOrderCreateReq;
 import com.louis296.car_sale.model.resp.Resp;
 import com.louis296.car_sale.service.AfterSaleOrderService;
@@ -30,7 +31,7 @@ public class AfterSaleOrderController {
     }
 
     @PostMapping("/cancel")
-    Resp orderCancel(@RequestBody AfterSaleOrderCreateReq req){
-        return saleOrderService.orderCancel(req.getSaleOrderId());
+    Resp orderCancel(@RequestBody AfterSaleOrderCancelReq req){
+        return saleOrderService.orderCancel(req.getAfterSaleOrderId());
     }
 }
