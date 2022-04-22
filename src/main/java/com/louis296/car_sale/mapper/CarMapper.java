@@ -11,4 +11,5 @@ public interface CarMapper {
     List<Car> getAllCars();
     void createCar(Car car);
     void softDeleteCar(int id);
+    void setCarImg(String img,int id);
 }

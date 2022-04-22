@@ -8,11 +8,14 @@ import com.louis296.car_sale.model.req.CarCreateReq;
 import com.louis296.car_sale.model.resp.CarListData;
 import com.louis296.car_sale.model.resp.CarResp;
 import com.louis296.car_sale.model.resp.Resp;
+import com.louis296.car_sale.util.FileUtil;
 import com.louis296.car_sale.util.RespUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,5 +96,20 @@ public class CarServiceImpl implements CarService{
             return RespUtil.errorResp("sql error");
         }
         return resp;
+    }
+
+    @Override
+    public Resp carImgUpload(MultipartFile file, HttpServletRequest request,int carId) {
+        try{
+            String fileName= FileUtil.saveFileToAssetWithFolderName("car_img",file);
+            if(fileName.equals("")){
+                return RespUtil.errorResp("file save error");
+            }
+            String url=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/car_img/"+fileName;
+            carMapper.setCarImg(url,carId);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        return RespUtil.noDataSuccessResp();
     }
 }

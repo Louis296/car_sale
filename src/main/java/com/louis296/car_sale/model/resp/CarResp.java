@@ -10,6 +10,7 @@ public class CarResp {
     private String name;
     private String version;
     private double price;
+    private String imgUrl;
     private String description;
     private long orderId;
 
@@ -18,6 +19,7 @@ public class CarResp {
         this.name=car.getName();
         this.version=car.getVersion();
         this.price=car.getPrice();
+        this.imgUrl=car.getImgUrl();
         this.description=car.getDescription();
     }
 
@@ -67,5 +69,13 @@ public class CarResp {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

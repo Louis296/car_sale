@@ -8,6 +8,7 @@
         <result column="name" property="name"/>
         <result column="version" property="version"/>
         <result column="price" property="price"/>
+        <result column="img_url" property="imgUrl"/>
         <result column="description" property="description"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
@@ -29,5 +30,9 @@
 
     <update id="softDeleteCar" parameterType="java.lang.Integer">
         update car set status=0 where id=#{id};
+    </update>
+
+    <update id="setCarImg">
+        update car set img_url=#{img} where id=#{id};
     </update>
 </mapper>

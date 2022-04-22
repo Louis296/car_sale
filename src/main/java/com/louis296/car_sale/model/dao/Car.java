@@ -9,6 +9,7 @@ public class Car {
     private String name;
     private String version;
     private double price;
+    private String imgUrl;
     private String description;
     private Date createTime;
     private Date updateTime;
@@ -47,6 +48,14 @@ public class Car {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getDescription() {
