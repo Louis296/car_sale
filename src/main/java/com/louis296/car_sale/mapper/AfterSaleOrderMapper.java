@@ -11,4 +11,6 @@ public interface AfterSaleOrderMapper {
     void changeOrderStatus(int id,int status);
     List<AfterSaleOrder> getOrdersByUserIdAndType(int userId,int offset,int limit,int type);
     AfterSaleOrder getOrderById(int id);
+    void setOrderPrice(int id,double price);
+    List<AfterSaleOrder> getAllOrders(int offset,int limit,int type);
 }

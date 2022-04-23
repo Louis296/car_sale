@@ -7,4 +7,7 @@ public interface AfterSaleOrderService {
     Resp orderCreate(AfterSaleOrderCreateReq req,int type,int userId);
     Resp orderCancel(int orderId);
     Resp orderList(int userId,int offset,int limit,int type);
+    Resp orderPay(int orderId);
+    Resp orderProcess(int orderId);
+    Resp orderQuote(int orderId,double price);
 }

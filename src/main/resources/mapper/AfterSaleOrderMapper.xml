@@ -37,4 +37,13 @@
     <select id="getOrderById" parameterType="java.lang.Integer" resultMap="result">
         select * from after_sale_order where id=#{id};
     </select>
+
+    <update id="setOrderPrice">
+        update after_sale_order set price=#{price} where id=#{id};
+    </update>
+
+    <select id="getAllOrders" parameterType="java.lang.Integer" resultMap="result">
+        select * from after_sale_order where type=#{type}
+        order by create_time desc limit #{limit} offset #{offset};
+    </select>
 </mapper>

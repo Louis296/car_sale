@@ -81,13 +81,18 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
     public Resp orderList(int userId, int offset, int limit, int type) {
         Resp resp=new Resp();
         try{
-            List<AfterSaleOrder> list=afterSaleOrderMapper.getOrdersByUserIdAndType(userId,limit*(offset-1),limit,type);
+            List<AfterSaleOrder> list;
+            if(userId!=-1){
+                list=afterSaleOrderMapper.getOrdersByUserIdAndType(userId,limit*(offset-1),limit,type);
+            }else{
+                list=afterSaleOrderMapper.getAllOrders(limit*(offset-1),limit,type);
+            }
 
             List<AfterSaleOrderResp> respList=new ArrayList<>();
             for(AfterSaleOrder order:list){
                 AfterSaleOrderResp orderResp=new AfterSaleOrderResp(order);
                 orderResp.setCarResp(new CarResp(carMapper.getCarById((int) order.getCarId())));
-                orderResp.setUserResp(new UserResp(userMapper.getUserById(userId)));
+                orderResp.setUserResp(new UserResp(userMapper.getUserById((int) order.getUserId())));
                 respList.add(orderResp);
             }
 
@@ -101,5 +106,48 @@ public class AfterSaleOrderServiceImpl implements AfterSaleOrderService{
             return RespUtil.errorResp("sql error");
         }
         return resp;
+    }
+
+    @Override
+    public Resp orderPay(int orderId) {
+        try{
+            AfterSaleOrder afterSaleOrder=afterSaleOrderMapper.getOrderById(orderId);
+            if(afterSaleOrder.getOrderStatus()!=2){
+                return RespUtil.errorResp("order with status "+afterSaleOrder.getOrderStatus()+" cannot pay");
+            }
+            afterSaleOrderMapper.changeOrderStatus(orderId,3);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        return RespUtil.noDataSuccessResp();
+    }
+
+    @Override
+    public Resp orderProcess(int orderId) {
+        try{
+            AfterSaleOrder afterSaleOrder=afterSaleOrderMapper.getOrderById(orderId);
+            if(afterSaleOrder.getOrderStatus()!=0){
+                return RespUtil.errorResp("order with status "+afterSaleOrder.getOrderStatus()+" cannot process");
+            }
+            afterSaleOrderMapper.changeOrderStatus(orderId,1);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        return RespUtil.noDataSuccessResp();
+    }
+
+    @Override
+    public Resp orderQuote(int orderId, double price) {
+        try{
+            AfterSaleOrder afterSaleOrder=afterSaleOrderMapper.getOrderById(orderId);
+            if(afterSaleOrder.getOrderStatus()!=1){
+                return RespUtil.errorResp("order with status "+afterSaleOrder.getOrderStatus()+" cannot quote");
+            }
+            afterSaleOrderMapper.changeOrderStatus(orderId,2);
+            afterSaleOrderMapper.setOrderPrice(orderId,price);
+        }catch (Exception e){
+            return RespUtil.errorResp("sql error");
+        }
+        return RespUtil.noDataSuccessResp();
     }
 }
