@@ -26,6 +26,9 @@
     <insert id="createCar" parameterType="com.louis296.car_sale.model.dao.Car">
         insert into car(name, version, price, description, create_time, update_time)
         values (#{name},#{version},#{price},#{description},now(),now());
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
     </insert>
 
     <update id="softDeleteCar" parameterType="java.lang.Integer">

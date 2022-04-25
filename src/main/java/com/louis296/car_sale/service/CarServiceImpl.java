@@ -63,7 +63,10 @@ public class CarServiceImpl implements CarService{
         }catch (Exception e){
             return RespUtil.errorResp("sql error");
         }
-        return RespUtil.noDataSuccessResp();
+        Resp resp=new Resp();
+        resp.setStatus("success");
+        resp.setData(new CarResp(car));
+        return resp;
     }
 
     @Override

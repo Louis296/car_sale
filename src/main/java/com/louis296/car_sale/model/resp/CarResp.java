@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.louis296.car_sale.model.dao.Car;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CarResp {
+public class CarResp implements Data{
 
     private long id;
     private String name;
