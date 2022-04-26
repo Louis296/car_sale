@@ -1,6 +1,5 @@
 package com.louis296.car_sale.controller;
 
-import com.louis296.car_sale.model.dao.SaleOrder;
 import com.louis296.car_sale.model.dao.User;
 import com.louis296.car_sale.model.req.SaleOrderCancelReq;
 import com.louis296.car_sale.model.req.SaleOrderCreateReq;
