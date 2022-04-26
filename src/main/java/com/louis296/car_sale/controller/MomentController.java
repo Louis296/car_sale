@@ -41,4 +41,9 @@ public class MomentController {
     Resp momentDelete(@RequestBody MomentDeleteReq req,User user){
         return momentService.momentDelete(req.getMomentId(), (int) user.getId());
     }
+
+    @PostMapping("/thumb_up")
+    Resp momentThumbUp(@RequestBody MomentDeleteReq req,User user){
+        return momentService.momentThumbUp(req.getMomentId(), (int) user.getId());
+    }
 }

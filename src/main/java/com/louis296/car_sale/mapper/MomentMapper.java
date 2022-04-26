@@ -12,4 +12,5 @@ public interface MomentMapper {
     List<Moment> getMomentsByUserId(int userId,int offset,int limit);
     List<Moment> getAllMoments(int offset,int limit);
     Moment getMomentById(int id);
+    void changeMomentLike(int like,int id);
 }

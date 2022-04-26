@@ -37,4 +37,8 @@
     <select id="getMomentById" parameterType="java.lang.Integer" resultMap="result">
         select * from moment where id=#{id};
     </select>
+
+    <update id="changeMomentLike" parameterType="java.lang.Integer">
+        update moment set `like`=#{like} where id=#{id};
+    </update>
 </mapper>

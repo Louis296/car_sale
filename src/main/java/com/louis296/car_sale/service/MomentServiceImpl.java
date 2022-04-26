@@ -1,8 +1,10 @@
 package com.louis296.car_sale.service;
 
 import com.louis296.car_sale.mapper.MomentMapper;
+import com.louis296.car_sale.mapper.ThumbUpMapper;
 import com.louis296.car_sale.mapper.UserMapper;
 import com.louis296.car_sale.model.dao.Moment;
+import com.louis296.car_sale.model.dao.ThumbUp;
 import com.louis296.car_sale.model.resp.MomentListData;
 import com.louis296.car_sale.model.resp.MomentResp;
 import com.louis296.car_sale.model.resp.Resp;
@@ -22,11 +24,13 @@ public class MomentServiceImpl implements MomentService{
 
     final private MomentMapper momentMapper;
     final private UserMapper userMapper;
-    @Autowired
+    final private ThumbUpMapper thumbUpMapper;
 
-    public MomentServiceImpl(MomentMapper momentMapper, UserMapper userMapper) {
+    @Autowired
+    public MomentServiceImpl(MomentMapper momentMapper, UserMapper userMapper, ThumbUpMapper thumbUpMapper) {
         this.momentMapper = momentMapper;
         this.userMapper = userMapper;
+        this.thumbUpMapper = thumbUpMapper;
     }
 
 
@@ -104,6 +108,24 @@ public class MomentServiceImpl implements MomentService{
         }catch (Exception e){
             return RespUtil.errorResp("sql error");
         }
+        return RespUtil.noDataSuccessResp();
+    }
+
+    @Override
+    public Resp momentThumbUp(int momentId, int userId) {
+        ThumbUp thumbUp=thumbUpMapper.getThumbUpByUserIdAndMomentId(userId,momentId);
+        if (thumbUp!=null){
+            return RespUtil.errorResp("user "+userId+" already thumb up moment "+momentId);
+        }
+        Moment moment=momentMapper.getMomentById(momentId);
+        if(moment==null){
+            return RespUtil.errorResp("no such moment");
+        }
+        thumbUp=new ThumbUp();
+        thumbUp.setMomentId(momentId);
+        thumbUp.setUserId(userId);
+        thumbUpMapper.createThumbUp(thumbUp);
+        momentMapper.changeMomentLike((int) (moment.getLike()+1),momentId);
         return RespUtil.noDataSuccessResp();
     }
 }

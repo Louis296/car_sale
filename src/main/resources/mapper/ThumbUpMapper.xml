@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis296.car_sale.mapper.ThumbUpMapper">
+    <resultMap id="result" type="com.louis296.car_sale.model.dao.ThumbUp">
+        <id column="id" property="id"/>
+        <result column="moment_id" property="momentId"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="createThumbUp" parameterType="com.louis296.car_sale.model.dao.ThumbUp">
+        insert into thumb_up(moment_id, user_id, create_time, update_time)
+        VALUES(#{momentId},#{userId},now(),now());
+    </insert>
+
+    <select id="getThumbUpByUserIdAndMomentId" resultMap="result">
+        select * from thumb_up where moment_id=#{momentId} and user_id=#{userId};
+    </select>
+</mapper>
