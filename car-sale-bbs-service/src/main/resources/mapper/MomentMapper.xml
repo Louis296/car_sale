@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis296.carsalebbsservice.mapper.MomentMapper">
+    <resultMap id="result" type="com.louis296.carsalebbsservice.model.dao.Moment">
+        <id column="id" property="id"/>
+        <result column="context" property="context"/>
+        <result column="like" property="like"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="createMoment" parameterType="com.louis296.carsalebbsservice.model.dao.Moment">
+        insert into moment (context, img_url, user_id, create_time, update_time)
+        values (#{context},#{imgUrl},#{userId},now(),now());
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
+    <update id="softDeleteMoment" parameterType="java.lang.Integer">
+        update moment set status=0,update_time=now() where id=#{id};
+    </update>
+
+    <select id="getMomentsByUserId" parameterType="java.lang.Integer" resultMap="result">
+        select * from moment where user_id=#{userId} and status=1 order by create_time desc limit #{limit} offset #{offset};
+    </select>
+
+    <select id="getAllMoments" parameterType="java.lang.Integer" resultMap="result">
+        select * from moment where status=1 order by create_time desc limit #{limit} offset #{offset};
+    </select>
+
+    <select id="getMomentById" parameterType="java.lang.Integer" resultMap="result">
+        select * from moment where id=#{id};
+    </select>
+
+    <update id="changeMomentLike" parameterType="java.lang.Integer">
+        update moment set `like`=#{like} where id=#{id};
+    </update>
+</mapper>

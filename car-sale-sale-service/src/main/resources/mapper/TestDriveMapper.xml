@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis296.carsalesaleservice.mapper.TestDriveMapper">
+    <resultMap id="result" type="com.louis296.carsalesaleservice.model.dao.TestDrive">
+        <id column="id" property="id"/>
+        <result column="car_id" property="carId"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="createTestDrive" parameterType="com.louis296.carsalesaleservice.model.dao.TestDrive">
+        insert into test_drive(car_id, address, phone, user_id, create_time, update_time)
+        values (#{carId},#{address},#{phone},#{userId},now(),now());
+    </insert>
+
+    <select id="getTestDrivesByUserId" parameterType="java.lang.Integer" resultMap="result">
+        select * from test_drive where user_id=#{id} order by create_time limit #{limit} offset #{offset};
+    </select>
+
+    <select id="getAllTestDrives" parameterType="java.lang.Integer" resultMap="result">
+        select * from test_drive order by create_time limit #{limit} offset #{offset};
+    </select>
+
+    <delete id="deleteTestDrive" parameterType="java.lang.Integer">
+        delete from test_drive where id=#{id};
+    </delete>
+
+    <select id="getTestDriveById" parameterType="java.lang.Integer" resultMap="result">
+        select * from test_drive where id=#{id};
+    </select>
+</mapper>
